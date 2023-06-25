@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.weather.ForecastWeatherApplication.constants.WeatherApplicationConstants;
 import org.weather.ForecastWeatherApplication.exception.OpenWeatherApiException;
-import org.weather.ForecastWeatherApplication.model.WeatherDataResponse;
+import org.weather.ForecastWeatherApplication.model.WeatherForecastApiResponse;
 import org.weather.ForecastWeatherApplication.model.WeatherResponse;
 import org.weather.ForecastWeatherApplication.model.error.Error;
 
@@ -33,7 +33,7 @@ public class OpenWeatherApiCaller {
     @Value("${openWeather.api.key}")
     private String openWeatherApiKey;
 
-    private Map<String, WeatherDataResponse> weatherDataResponseMap ;
+    private Map<String, WeatherForecastApiResponse> weatherDataResponseMap ;
 
     public OpenWeatherApiCaller(RestTemplate restTemplate, RetryTemplate retryTemplate) {
         this.restTemplate = restTemplate;

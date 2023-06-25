@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.weather.ForecastWeatherApplication.builder.WeatherDataResponseBuilder;
 import org.weather.ForecastWeatherApplication.model.DateWiseData;
-import org.weather.ForecastWeatherApplication.model.DayWiseDetails;
-import org.weather.ForecastWeatherApplication.model.WeatherDataResponse;
+import org.weather.ForecastWeatherApplication.model.DayWiseWeatherForecast;
+import org.weather.ForecastWeatherApplication.model.WeatherForecastApiResponse;
 import org.weather.ForecastWeatherApplication.model.WeatherResponse;
 import org.weather.ForecastWeatherApplication.validator.RequestParameterValidator;
 
@@ -38,9 +38,9 @@ public class WeatherApplicationService {
         this.requestParameterValidator = requestParameterValidator;
     }
 
-    public WeatherDataResponse getTemperature(String transactionId, String cityName, String metricUnit) {
+    public WeatherForecastApiResponse getTemperature(String transactionId, String cityName, String metricUnit) {
         requestParameterValidator.validateParameter(metricUnit);
-        List<DayWiseDetails> dayWiseDetailsList = new ArrayList<>();
+        List<DayWiseWeatherForecast> dayWiseWeatherForecastList = new ArrayList<>();
         WeatherResponse weatherResponse = openWeatherApiCaller.getDataFromOpenWeatherApi(cityName, metricUnit);
         if (Objects.nonNull(weatherResponse)) {
             for (DateWiseData dateWiseData : weatherResponse.getList()) {
@@ -50,25 +50,25 @@ public class WeatherApplicationService {
                 if (age.getDays() >= minRange && age.getDays() < maxRange) {
                     String[] weatherForecastDateAndTime = dateWiseData.getDt_txt().split("\\s+");
                     String weatherForecastDate = weatherForecastDateAndTime[0];
-                    setMinMaxTemperature(dayWiseDetailsList, dateWiseData, weatherForecastDate);
+                    setMinMaxTemperature(dayWiseWeatherForecastList, dateWiseData, weatherForecastDate);
                 }
             }
         }
-        return weatherDataResponseBuilder.responseBuilder(dayWiseDetailsList, transactionId,cityName,metricUnit);
+        return weatherDataResponseBuilder.responseBuilder(dayWiseWeatherForecastList, transactionId,cityName,metricUnit);
     }
 
-    private void setMinMaxTemperature(List<DayWiseDetails> dayWiseDetailsList, DateWiseData dateWiseData, String weatherForecastDate) {
-        DayWiseDetails dayWiseDetailsReference = null;
-        for (DayWiseDetails dayWiseDetails : dayWiseDetailsList) {
-            if (dayWiseDetails.getDay().equalsIgnoreCase(weatherForecastDate)) {
-                dayWiseDetailsReference = dayWiseDetails;
+    private void setMinMaxTemperature(List<DayWiseWeatherForecast> dayWiseWeatherForecastList, DateWiseData dateWiseData, String weatherForecastDate) {
+        DayWiseWeatherForecast dayWiseWeatherForecastReference = null;
+        for (DayWiseWeatherForecast dayWiseWeatherForecast : dayWiseWeatherForecastList) {
+            if (dayWiseWeatherForecast.getDay().equalsIgnoreCase(weatherForecastDate)) {
+                dayWiseWeatherForecastReference = dayWiseWeatherForecast;
                 break;
             }
         }
-        if(Objects.isNull(dayWiseDetailsReference)){
-            dayWiseDetailsList.add(populateMinMaxTemperature.populateMinMaxTemperature(dayWiseDetailsReference,dateWiseData,weatherForecastDate));
+        if(Objects.isNull(dayWiseWeatherForecastReference)){
+            dayWiseWeatherForecastList.add(populateMinMaxTemperature.populateMinMaxTemperature(dayWiseWeatherForecastReference,dateWiseData,weatherForecastDate));
         }else{
-            populateMinMaxTemperature.populateMinMaxTemperature(dayWiseDetailsReference,dateWiseData,weatherForecastDate);
+            populateMinMaxTemperature.populateMinMaxTemperature(dayWiseWeatherForecastReference,dateWiseData,weatherForecastDate);
         }
 
     }

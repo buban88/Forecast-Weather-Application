@@ -1,9 +1,9 @@
 package org.weather.ForecastWeatherApplication.builder;
 
-import org.weather.ForecastWeatherApplication.model.WeatherDataResponse;
+import org.weather.ForecastWeatherApplication.model.WeatherForecastApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.weather.ForecastWeatherApplication.model.DayWiseDetails;
+import org.weather.ForecastWeatherApplication.model.DayWiseWeatherForecast;
 
 import java.time.Instant;
 import java.util.List;
@@ -11,15 +11,15 @@ import java.util.List;
 @Component
 public class WeatherDataResponseBuilder {
 
-    public WeatherDataResponse responseBuilder(List<DayWiseDetails> dayWiseDetailsList, String transactionId, String cityName, String metricUnit){
-        WeatherDataResponse weatherDataResponse = new WeatherDataResponse();
-        weatherDataResponse.setTransactionId(transactionId);
-        weatherDataResponse.setStatus(HttpStatus.OK.value());
-        weatherDataResponse.setTemperatureMeasurement(getMeasurementUnit(metricUnit));
-        weatherDataResponse.setCityName(cityName);
-        weatherDataResponse.setTimeStamp(Instant.now().toString());
-        weatherDataResponse.setDayWiseDetailsList(dayWiseDetailsList);
-        return weatherDataResponse;
+    public WeatherForecastApiResponse responseBuilder(List<DayWiseWeatherForecast> dayWiseWeatherForecastList, String transactionId, String cityName, String metricUnit){
+        WeatherForecastApiResponse weatherForecastApiResponse = new WeatherForecastApiResponse();
+        weatherForecastApiResponse.setTransactionId(transactionId);
+        weatherForecastApiResponse.setStatus(HttpStatus.OK.value());
+        weatherForecastApiResponse.setTemperatureMeasurement(getMeasurementUnit(metricUnit));
+        weatherForecastApiResponse.setCityName(cityName);
+        weatherForecastApiResponse.setTimeStamp(Instant.now().toString());
+        weatherForecastApiResponse.setDayWiseDetailsList(dayWiseWeatherForecastList);
+        return weatherForecastApiResponse;
 
     }
 

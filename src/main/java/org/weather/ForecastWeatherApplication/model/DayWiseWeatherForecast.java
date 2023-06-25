@@ -1,13 +1,13 @@
 package org.weather.ForecastWeatherApplication.model;
 
-public class DayWiseDetails {
+public class DayWiseWeatherForecast {
     private String day;
     private Double maxTemperature ;
     private Double minTemperature ;
 
     private Boolean chancesOfRain;
 
-    public DayWiseDetails() {
+    public DayWiseWeatherForecast() {
     }
 
     public Boolean getChancesOfRain() {

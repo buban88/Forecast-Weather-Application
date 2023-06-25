@@ -4,16 +4,16 @@ import org.weather.ForecastWeatherApplication.model.error.Error;
 
 import java.util.List;
 
-public class WeatherDataResponse {
+public class WeatherForecastApiResponse {
     private String transactionId;
     private Integer status;
     private String timeStamp;
     private String temperatureMeasurement;
     private String cityName;
-    private List<DayWiseDetails> dayWiseDetailsList;
+    private List<DayWiseWeatherForecast> dayWiseWeatherForecastList;
     private List<Error> errorList;
 
-    public WeatherDataResponse() {
+    public WeatherForecastApiResponse() {
     }
 
     public String getTransactionId() {
@@ -56,12 +56,12 @@ public class WeatherDataResponse {
         this.cityName = cityName;
     }
 
-    public List<DayWiseDetails> getDayWiseDetailsList() {
-        return dayWiseDetailsList;
+    public List<DayWiseWeatherForecast> getDayWiseDetailsList() {
+        return dayWiseWeatherForecastList;
     }
 
-    public void setDayWiseDetailsList(List<DayWiseDetails> dayWiseDetailsList) {
-        this.dayWiseDetailsList = dayWiseDetailsList;
+    public void setDayWiseDetailsList(List<DayWiseWeatherForecast> dayWiseWeatherForecastList) {
+        this.dayWiseWeatherForecastList = dayWiseWeatherForecastList;
     }
 
     public List<Error> getErrorList() {
@@ -80,7 +80,7 @@ public class WeatherDataResponse {
                 ", timeStamp='" + timeStamp + '\'' +
                 ", temperatureMeasurement='" + temperatureMeasurement + '\'' +
                 ", cityName='" + cityName + '\'' +
-                ", dayWiseDetailsList=" + dayWiseDetailsList +
+                ", dayWiseDetailsList=" + dayWiseWeatherForecastList +
                 ", errorList=" + errorList +
                 '}';
     }
