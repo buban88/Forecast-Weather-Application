@@ -11,4 +11,6 @@ public class WeatherApplicationConstants {
     public static final String METRIC_UNIT = "units";
     public static final String INVALID_KEY = "INVALID_KEY";
 
+    public static final String INVALID_PARAMETER = "INVALID_METRIC_UNIT";
+
 }

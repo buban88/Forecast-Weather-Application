@@ -7,6 +7,7 @@ import org.weather.ForecastWeatherApplication.model.DateWiseData;
 import org.weather.ForecastWeatherApplication.model.DayWiseDetails;
 import org.weather.ForecastWeatherApplication.model.WeatherDataResponse;
 import org.weather.ForecastWeatherApplication.model.WeatherResponse;
+import org.weather.ForecastWeatherApplication.validator.RequestParameterValidator;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -23,18 +24,22 @@ public class WeatherApplicationService {
     private final OpenWeatherApiCaller openWeatherApiCaller;
     private final WeatherDataResponseBuilder weatherDataResponseBuilder;
 
+    private final RequestParameterValidator requestParameterValidator;
+
     @Value("${weather.forecast.min}")
     private Integer minRange;
     @Value("${weather.forecast.max}")
     private Integer maxRange;
 
-    public WeatherApplicationService(OpenWeatherApiCaller openWeatherApiCaller,PopulateMinMaxTemperature populateMinMaxTemperature, WeatherDataResponseBuilder weatherDataResponseBuilder) {
+    public WeatherApplicationService(OpenWeatherApiCaller openWeatherApiCaller,PopulateMinMaxTemperature populateMinMaxTemperature, WeatherDataResponseBuilder weatherDataResponseBuilder, RequestParameterValidator requestParameterValidator) {
         this.openWeatherApiCaller = openWeatherApiCaller;
         this.populateMinMaxTemperature = populateMinMaxTemperature;
         this.weatherDataResponseBuilder = weatherDataResponseBuilder;
+        this.requestParameterValidator = requestParameterValidator;
     }
 
     public WeatherDataResponse getTemperature(String transactionId, String cityName, String metricUnit) {
+        requestParameterValidator.validateParameter(metricUnit);
         List<DayWiseDetails> dayWiseDetailsList = new ArrayList<>();
         WeatherResponse weatherResponse = openWeatherApiCaller.getDataFromOpenWeatherApi(cityName, metricUnit);
         if (Objects.nonNull(weatherResponse)) {
@@ -60,15 +65,12 @@ public class WeatherApplicationService {
                 break;
             }
         }
-        if (Objects.isNull(dayWiseDetailsReference)) {
-            dayWiseDetailsReference = new DayWiseDetails();
-            dayWiseDetailsReference.setDay(weatherForecastDate);
-            dayWiseDetailsReference.setMaxTemperature(dateWiseData.getMain().getTemp_max());
-            dayWiseDetailsReference.setMinTemperature(dateWiseData.getMain().getTemp_min());
-            dayWiseDetailsList.add(dayWiseDetailsReference);
-        } else {
-            populateMinMaxTemperature.populateMinMaxTemperature(dayWiseDetailsReference, dateWiseData.getMain().getTemp_min(), dateWiseData.getMain().getTemp_max());
+        if(Objects.isNull(dayWiseDetailsReference)){
+            dayWiseDetailsList.add(populateMinMaxTemperature.populateMinMaxTemperature(dayWiseDetailsReference,dateWiseData,weatherForecastDate));
+        }else{
+            populateMinMaxTemperature.populateMinMaxTemperature(dayWiseDetailsReference,dateWiseData,weatherForecastDate);
         }
+
     }
 
 

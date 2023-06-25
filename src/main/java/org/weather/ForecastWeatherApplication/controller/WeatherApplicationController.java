@@ -23,7 +23,7 @@ public class WeatherApplicationController {
     }
 
     @GetMapping("/weatherForecast")
-    public ResponseEntity<WeatherDataResponse> getMinMaxTemperature(
+    public ResponseEntity<WeatherDataResponse> getTemperatureForecast(
             @RequestHeader String transactionId, @RequestParam String cityName, @RequestParam String metricUnit){
 
         return ResponseEntity.ok(weatherApplicationService.getTemperature(transactionId,cityName,metricUnit));

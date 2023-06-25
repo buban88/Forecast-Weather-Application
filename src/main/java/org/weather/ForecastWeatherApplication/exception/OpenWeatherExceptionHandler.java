@@ -22,6 +22,14 @@ public class OpenWeatherExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(value = InvalidRequestParameterException.class)
+    public ResponseEntity<WeatherDataResponse> handleOpenWeatherApiException(
+            HttpServletRequest request, InvalidRequestParameterException openWeatherApiException) {
+        WeatherDataResponse response =
+                createResponse(request, openWeatherApiException.getErrors(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
     private WeatherDataResponse createResponse(
             HttpServletRequest request, List<Error> errorTypes, HttpStatus errorType) {
         WeatherDataResponse response = new WeatherDataResponse();

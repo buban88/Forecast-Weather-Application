@@ -5,7 +5,19 @@ public class DayWiseDetails {
     private Double maxTemperature ;
     private Double minTemperature ;
 
+    private Boolean chancesOfRain;
+
     public DayWiseDetails() {
+    }
+
+    public Boolean getChancesOfRain() {
+        if(this.chancesOfRain == null)
+             return false;
+        return chancesOfRain;
+    }
+
+    public void setChancesOfRain(Boolean chancesOfRain) {
+        this.chancesOfRain = chancesOfRain;
     }
 
     public String getDay() {
@@ -17,6 +29,8 @@ public class DayWiseDetails {
     }
 
     public Double getMaxTemperature() {
+        if(this.maxTemperature==null)
+            return 0.0;
         return maxTemperature;
     }
 
@@ -25,6 +39,8 @@ public class DayWiseDetails {
     }
 
     public Double getMinTemperature() {
+        if(this.minTemperature==null)
+            return Double.MAX_VALUE;
         return minTemperature;
     }
 
