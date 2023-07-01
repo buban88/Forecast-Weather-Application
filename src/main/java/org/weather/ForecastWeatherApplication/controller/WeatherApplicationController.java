@@ -1,14 +1,12 @@
 package org.weather.ForecastWeatherApplication.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.weather.ForecastWeatherApplication.model.WeatherForecastApiResponse;
 import org.weather.ForecastWeatherApplication.service.WeatherApplicationService;
 
 @RestController
+@RequestMapping("/weather")
 public class WeatherApplicationController {
 
     private final WeatherApplicationService weatherApplicationService;

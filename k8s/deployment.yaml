@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Forecast-Weather-Application
+spec:
+  selector:
+    matchLabels:
+      app: Forecast-Weather-Application
+  template:
+    metadata:
+      labels:
+        app: Forecast-Weather-Application
+    spec:
+      containers:
+        - name: Forecast-Weather-Application
+          image: IMAGE_URL/ForecastWeatherApplication
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: Forecast-Weather-Svc
+spec:
+  selector:
+    app.kubernetes.io/name: Forecast-Weather-Application
+  ports:
+    - port: 80
+      targetPort: 8081
