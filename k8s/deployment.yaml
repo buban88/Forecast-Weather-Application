@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: Forecast-Weather-Application
-          image: IMAGE_URL/ForecastWeatherApplication
+          image: IMAGE_URL/forecastWeatherApplication
           imagePullPolicy: Always
           ports:
             - containerPort: 8081
