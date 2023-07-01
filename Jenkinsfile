@@ -1,10 +1,9 @@
 node{
-    def repourl = ${REGISTRY_URL}/${PROJECT_ID}/${ARTIFACT_REGISTRY}
+    def repourl = "${REGISTRY_URL}/${PROJECT_ID}/${ARTIFACT_REGISTRY}"
     def mvnHome = tool name: 'maven', type: 'maven'
     def mvnCMD = "${mvnHome}/bin/mvn"
     stage('Checkout') {
-        checkout([
-             $class: 'GitSCM',
+        checkout([$class: 'GitSCM',
              branches: [[name: '*/main']],
              extensions: [],
              submoduleCfg: [],

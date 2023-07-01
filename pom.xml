@@ -122,7 +122,7 @@
 						<image>openjdk:11</image>
 					</from>
 					<to>
-						<image>${REPO_URL}/weatherForecast</image>
+						<image>${REPO_URL}/ForecastWeatherApplication</image>
 						<tags>${project.version}</tags>
 					</to>
 				</configuration>
