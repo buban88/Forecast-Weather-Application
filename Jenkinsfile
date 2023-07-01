@@ -5,7 +5,7 @@ node{
     stage('Checkout') {
         checkout([
              $class: 'GitSCM',
-             branches: [[name: '*/master']],
+             branches: [[name: '*/main']],
              extensions: [],
              submoduleCfg: [],
              userRemoteConfigs: [[credentialsId: 'git',
