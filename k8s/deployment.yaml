@@ -23,7 +23,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: forecast-weather-Svc
+  name: forecast-weather-svc
 spec:
   selector:
     app.kubernetes.io/name: forecast-weather-application
