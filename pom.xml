@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.weather</groupId>
-	<artifactId>Forecast-Weather-Application</artifactId>
+	<artifactId>forecast-weather-application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Forecast-Weather-Application</name>
-	<description>Forecast Weather Application</description>
+	<name>forecast-weather-application</name>
+	<description>To forecast next days Weather</description>
 	<properties>
 		<java.version>11</java.version>
 		<spring-cloud.version>2021.0.7</spring-cloud.version>

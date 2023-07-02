@@ -9,7 +9,7 @@ openWeather:
 
 spring:
   application:
-    name: Forecast-Weather-Application
+    name: forecast-weather-application
 
 weather:
   forecast:
