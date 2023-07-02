@@ -17,3 +17,14 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: forecast-weather-svc
+spec:
+  selector:
+    app.kubernetes.io/name: forecast-weather-application
+  ports:
+    - port: 80
+      targetPort: 8081
