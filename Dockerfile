@@ -6,4 +6,4 @@ COPY ${JAR_FILE} forecastweatherapplication.jar
 
 ENTRYPOINT ["java","-jar","/forecastweatherapplication.jar"]
 
-EXPOSE 8761
+EXPOSE 8081
