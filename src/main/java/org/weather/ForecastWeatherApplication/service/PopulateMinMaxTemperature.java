@@ -3,6 +3,7 @@ package org.weather.ForecastWeatherApplication.service;
 import org.springframework.stereotype.Component;
 import org.weather.ForecastWeatherApplication.model.DateWiseData;
 import org.weather.ForecastWeatherApplication.model.DayWiseWeatherForecast;
+import org.weather.ForecastWeatherApplication.model.decorator.DayWiseWeather;
 
 import java.util.Objects;
 
@@ -21,6 +22,22 @@ public class PopulateMinMaxTemperature {
 
         }
         return dayWiseWeatherForecast;
+    }
+
+    public DayWiseWeather populateMinMaxTemperature(DayWiseWeather dayWiseWeatherForecast, DateWiseData dateWiseData, String weatherForecastDate){
+        if(Objects.isNull(dayWiseWeatherForecast)){
+            dayWiseWeatherForecast = new DayWiseWeather();
+            dayWiseWeatherForecast.setDay(weatherForecastDate);
+        }
+        dayWiseWeatherForecast.setMaxTemperature(Math.max(dayWiseWeatherForecast.getMaxTemperature(),dateWiseData.getMain().getTemp_max()));
+        dayWiseWeatherForecast.setMinTemperature(Math.min(dayWiseWeatherForecast.getMinTemperature(),dateWiseData.getMain().getTemp_min()));
+        return dayWiseWeatherForecast;
+    }
+
+    public void populateRainChances(DayWiseWeather dayWiseWeatherForecast, DateWiseData dateWiseData){
+       if(dateWiseData.getPop().equalsIgnoreCase("0")){
+           dayWiseWeatherForecast.setAdditionalDetails("Please carry an Umbrella");
+       }
     }
 
 }

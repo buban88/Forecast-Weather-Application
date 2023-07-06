@@ -10,6 +10,22 @@ openWeather:
 spring:
   application:
     name: forecast-weather-application
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-27176195.okta.com/oauth2/default
+        client:
+          registration:
+            internal-client:
+              provider: okta
+              authorization-grant-type: client_credentials
+              scope: internal
+              client-id: 0oaa8svkacCTWWaGm5d7
+              client-secret: lmy5OuSW4BXsb2i_mDnBU5NCxlpaS1G0Hpj_QsjR
+          provider:
+            okta:
+              issuer-uri: https://dev-27176195.okta.com/oauth2/default
 
 weather:
   forecast:
@@ -33,3 +49,8 @@ eureka:
     register-with-eureka: true
     service-url:
       defaultZone: ${EUREKA_SERVER_ADDRESS:http://localhost:8761/eureka}
+
+okta:
+  oauth2:
+    issuer: https://dev-27176195.okta.com/oauth2/default
+    audience: api://default
