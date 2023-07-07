@@ -23,6 +23,7 @@ kind: Service
 metadata:
   name: forecast-weather-svc
 spec:
+  type: LoadBalancer
   selector:
     app: forecast-weather-application
   ports:
